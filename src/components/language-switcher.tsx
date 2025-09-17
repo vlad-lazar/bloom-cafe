@@ -1,6 +1,7 @@
+// src/components/language-switcher.tsx
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,32 +10,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Globe } from "lucide-react";
-
-const languages = {
-  ro: "Română",
-  en: "English",
-  ru: "Русский",
-};
+import { LanguageContext } from "@/app/layout";
+import { translations } from "@/lib/i18n";
+import { Language } from "@/hooks/use-language";
 
 export function LanguageSwitcher() {
-  const [currentLang, setCurrentLang] = useState("ro");
+  const { language, setLanguage } = useContext(LanguageContext);
+  const t = translations[language];
+
+  const languages: { [key in Language]: string } = {
+    ro: t.langRO,
+    en: t.langEN,
+    ru: t.langRU,
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
           <Globe className="h-4 w-4" />
-          {languages[currentLang as keyof typeof languages]}
+          {languages[language]}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {Object.entries(languages).map(([code, name]) => (
+        {(Object.keys(languages) as Language[]).map((lang) => (
           <DropdownMenuItem
-            key={code}
-            onClick={() => setCurrentLang(code)}
-            className={currentLang === code ? "bg-primary/10" : ""}
+            key={lang}
+            onClick={() => setLanguage(lang)}
+            className={language === lang ? "bg-primary/10" : ""}
           >
-            {name}
+            {languages[lang]}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

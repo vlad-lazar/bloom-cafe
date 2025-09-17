@@ -1,13 +1,18 @@
+// src/components/navigation.tsx
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Menu, X } from "lucide-react";
+import { LanguageContext } from "@/app/layout";
+import { translations } from "@/lib/i18n";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -23,19 +28,19 @@ export function Navigation() {
               href="/"
               className="text-foreground hover:text-primary transition-colors"
             >
-              Acasă
+              {t.navHome}
             </Link>
             <Link
               href="/meniu"
               className="text-foreground hover:text-primary transition-colors"
             >
-              Meniu
+              {t.navMenu}
             </Link>
             <Link
               href="/contact"
               className="text-foreground hover:text-primary transition-colors"
             >
-              Contact
+              {t.navContact}
             </Link>
             <LanguageSwitcher />
           </div>
@@ -66,21 +71,21 @@ export function Navigation() {
                 className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Acasă
+                {t.navHome}
               </Link>
               <Link
                 href="/meniu"
                 className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Meniu
+                {t.navMenu}
               </Link>
               <Link
                 href="/contact"
                 className="text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Contact
+                {t.navContact}
               </Link>
             </div>
           </div>

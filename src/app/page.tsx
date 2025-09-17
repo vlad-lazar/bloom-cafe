@@ -1,11 +1,20 @@
+// src/app/page.tsx
+"use client";
+
 import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Coffee, Clock, MapPin, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useContext } from "react";
+import { LanguageContext } from "./layout";
+import { translations } from "@/lib/i18n";
 
 export default function HomePage() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -15,7 +24,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20">
           <Image
             src="/hero_image.jpg"
-            alt="Bloom Café - Cafea și prăjituri cu petale de trandafir"
+            alt="Bloom Café"
             fill
             className="object-cover"
             priority
@@ -23,10 +32,10 @@ export default function HomePage() {
         </div>
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">
-            Bloom Café
+            {t.heroTitle}
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-pretty">
-            Oaza Ta de Cafea și Relaxare în Ungheni
+            {t.heroSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -34,7 +43,7 @@ export default function HomePage() {
               size="lg"
               className="bg-secondary hover:bg-secondary/90"
             >
-              <Link href="/meniu">Vezi Meniul</Link>
+              <Link href="/meniu">{t.heroBtnMenu}</Link>
             </Button>
             <Button
               asChild
@@ -42,7 +51,7 @@ export default function HomePage() {
               variant="outline"
               className="bg-white/10 backdrop-blur border-white/20 text-white hover:bg-white/20"
             >
-              <Link href="/contact">Comandă Acum</Link>
+              <Link href="/contact">{t.heroBtnOrder}</Link>
             </Button>
           </div>
         </div>
@@ -53,13 +62,10 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              Povestea Noastră
+              {t.aboutTitle}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Bloom Café este locul unde aromele autentice se întâlnesc cu
-              atmosfera caldă și primitoare. Ne dedicăm să oferim cea mai bună
-              experiență de cafea în Ungheni, folosind ingrediente proaspete și
-              rețete tradiționale.
+              {t.aboutText}
             </p>
           </div>
 
@@ -67,30 +73,30 @@ export default function HomePage() {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <Coffee className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Cafea Premium</h3>
-                <p className="text-muted-foreground">
-                  Boabe de cafea selectate cu grijă pentru aroma perfectă
-                </p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t.feature1Title}
+                </h3>
+                <p className="text-muted-foreground">{t.feature1Text}</p>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="pt-6">
                 <Star className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Atmosferă Unică</h3>
-                <p className="text-muted-foreground">
-                  Un spațiu elegant și confortabil pentru relaxare
-                </p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t.feature2Title}
+                </h3>
+                <p className="text-muted-foreground">{t.feature2Text}</p>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="pt-6">
                 <Clock className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Deschis Zilnic</h3>
-                <p className="text-muted-foreground">
-                  08:00 - 22:00, pentru toate momentele tale speciale
-                </p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t.feature3Title}
+                </h3>
+                <p className="text-muted-foreground">{t.feature3Text}</p>
               </CardContent>
             </Card>
           </div>
@@ -102,10 +108,10 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              Specialitățile Casei
+              {t.specialtiesTitle}
             </h2>
             <p className="text-lg text-muted-foreground text-pretty">
-              Descoperă cele mai apreciate preparate de la Bloom Café
+              {t.specialtiesText}
             </p>
           </div>
 
@@ -115,10 +121,10 @@ export default function HomePage() {
                 <Coffee className="h-16 w-16 text-primary" />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Spanish Latte</h3>
-                <p className="text-muted-foreground mb-4">
-                  O combinație perfectă de espresso și lapte condensat dulce
-                </p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t.specialty1Name}
+                </h3>
+                <p className="text-muted-foreground mb-4">{t.specialty1Desc}</p>
                 <p className="text-2xl font-bold text-secondary">40 LEI</p>
               </CardContent>
             </Card>
@@ -129,11 +135,9 @@ export default function HomePage() {
               </div>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-2">
-                  Ice Caramel Latte
+                  {t.specialty2Name}
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Răcoritor și dulce, perfect pentru zilele calde
-                </p>
+                <p className="text-muted-foreground mb-4">{t.specialty2Desc}</p>
                 <p className="text-2xl font-bold text-secondary">40 LEI</p>
               </CardContent>
             </Card>
@@ -143,10 +147,10 @@ export default function HomePage() {
                 <Coffee className="h-16 w-16 text-primary" />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Ceai Natural</h3>
-                <p className="text-muted-foreground mb-4">
-                  Amestecuri naturale de plante pentru o experiență autentică
-                </p>
+                <h3 className="text-xl font-semibold mb-2">
+                  {t.specialty3Name}
+                </h3>
+                <p className="text-muted-foreground mb-4">{t.specialty3Desc}</p>
                 <p className="text-2xl font-bold text-secondary">60 LEI</p>
               </CardContent>
             </Card>
@@ -159,17 +163,15 @@ export default function HomePage() {
         <div className="container mx-auto max-w-4xl text-center">
           <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Vizitează-ne în Ungheni
+            {t.locationTitle}
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Te așteptăm cu drag în locația noastră din centrul orașului
-          </p>
+          <p className="text-lg text-muted-foreground mb-8">{t.locationText}</p>
           <Button
             asChild
             size="lg"
             className="bg-secondary hover:bg-secondary/90"
           >
-            <Link href="/contact">Vezi Detalii Contact</Link>
+            <Link href="/contact">{t.locationBtn}</Link>
           </Button>
         </div>
       </section>
@@ -182,22 +184,20 @@ export default function HomePage() {
               <h3 className="text-2xl font-bold text-primary mb-4">
                 Bloom Café
               </h3>
-              <p className="text-muted-foreground">
-                Oaza ta de cafea și relaxare în Ungheni, Moldova
-              </p>
+              <p className="text-muted-foreground">{t.footerSlogan}</p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Program</h4>
+              <h4 className="font-semibold mb-4">{t.footerHours}</h4>
               <p className="text-muted-foreground">
-                Luni - Duminică
+                {t.footerHoursDays}
                 <br />
                 08:00 - 22:00
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
+              <h4 className="font-semibold mb-4">{t.navContact}</h4>
               <p className="text-muted-foreground">
                 Ungheni, Moldova
                 <br />
@@ -207,7 +207,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Bloom Café. Toate drepturile rezervate.</p>
+            <p>&copy; 2024 Bloom Café. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -1,28 +1,34 @@
+// src/app/layout.tsx
+"use client";
+
 import type React from "react";
-import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-// import { Analytics } from "@vercel/analytics/next";
-import { Suspense } from "react";
+import { Suspense, useState, createContext } from "react";
 import "./globals.css";
+import { Language } from "@/hooks/use-language";
 
-export const metadata: Metadata = {
-  title: "Bloom Café - Oaza Ta de Cafea și Relaxare în Ungheni",
-  description:
-    "Bloom Café oferă cea mai bună cafea și atmosferă relaxantă în Ungheni, Moldova. Descoperă meniul nostru cu prețuri accesibile și savurează momentele speciale.",
-  generator: "v0.app",
-};
+export const LanguageContext = createContext<{
+  language: Language;
+  setLanguage: (language: Language) => void;
+}>({
+  language: "ro",
+  setLanguage: () => {},
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [language, setLanguage] = useState<Language>("ro");
+
   return (
-    <html lang="ro">
+    <html lang={language}>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>{children}</Suspense>
-        {/* <Analytics /> */}
+        <LanguageContext.Provider value={{ language, setLanguage }}>
+          <Suspense fallback={null}>{children}</Suspense>
+        </LanguageContext.Provider>
       </body>
     </html>
   );
