@@ -87,7 +87,12 @@ export default function ContactPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">+373 68 96 15 31</p>
+                  <a
+                    href="tel:+37368961531"
+                    className="text-muted-foreground hover:underline focus:outline-none"
+                  >
+                    +373 68 96 15 31
+                  </a>
                 </CardContent>
               </Card>
 
@@ -99,9 +104,12 @@ export default function ContactPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
+                  <a
+                    href="mailto:bloomcafe145@gmail.com"
+                    className="text-muted-foreground hover:underline focus:outline-none"
+                  >
                     bloomcafe145@gmail.com
-                  </p>
+                  </a>
                 </CardContent>
               </Card>
             </div>
