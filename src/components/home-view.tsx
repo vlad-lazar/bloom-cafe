@@ -11,12 +11,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Coffee, Clock, MapPin, Star } from "lucide-react";
 import { WorkingHours, type HoursInfo } from "@/components/working-hours";
+import { SpecialtiesSection, Specialty } from "./specialities-section";
+// Import the specialties component
 
 interface HomeViewProps {
   hoursData: HoursInfo[];
+  specialties: Specialty[]; // Add specialties to the props
 }
 
-export function HomeView({ hoursData }: HomeViewProps) {
+export function HomeView({ hoursData, specialties }: HomeViewProps) {
   const { language } = useContext(LanguageContext);
   const t = translations[language];
 
@@ -105,57 +108,8 @@ export function HomeView({ hoursData }: HomeViewProps) {
         </div>
       </section>
 
-      {/* Signature Items */}
-      <section className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              {t.specialtiesTitle}
-            </h2>
-            <p className="text-lg text-muted-foreground text-pretty">
-              {t.specialtiesText}
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                <Coffee className="h-16 w-16 text-primary" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">
-                  {t.specialty1Name}
-                </h3>
-                <p className="text-muted-foreground mb-4">{t.specialty1Desc}</p>
-                <p className="text-2xl font-bold text-secondary">40 LEI</p>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                <Coffee className="h-16 w-16 text-primary" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">
-                  {t.specialty2Name}
-                </h3>
-                <p className="text-muted-foreground mb-4">{t.specialty2Desc}</p>
-                <p className="text-2xl font-bold text-secondary">40 LEI</p>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden">
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                <Coffee className="h-16 w-16 text-primary" />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">
-                  {t.specialty3Name}
-                </h3>
-                <p className="text-muted-foreground mb-4">{t.specialty3Desc}</p>
-                <p className="text-2xl font-bold text-secondary">60 LEI</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      {/* Use the new dynamic specialties section */}
+      <SpecialtiesSection specialties={specialties} />
 
       {/* Location Section */}
       <section className="py-16 px-4">
@@ -187,7 +141,6 @@ export function HomeView({ hoursData }: HomeViewProps) {
             </div>
             <div>
               <h4 className="font-semibold mb-4">{t.footerHours}</h4>
-              {/* Use the dynamic component here */}
               <WorkingHours hoursData={hoursData} showTodayOnly={true} />
             </div>
             <div>
@@ -195,12 +148,17 @@ export function HomeView({ hoursData }: HomeViewProps) {
               <p className="text-muted-foreground">
                 Ungheni, Moldova
                 <br />
-                info@bloomcafe.md
+                <a
+                  href="mailto:bloomcafe145@gmail.com"
+                  className="text-muted-foreground hover:underline"
+                >
+                  bloomcafe145@gmail.com
+                </a>
               </p>
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Bloom Café. All rights reserved.</p>
+            <p>&copy; 2025 Bloom Café. All rights reserved.</p>
           </div>
         </div>
       </footer>
