@@ -9,12 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { Send, CheckCircle, AlertTriangle, Loader } from "lucide-react";
+
+// A type to manage the form's state
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
   const { language } = useContext(LanguageContext);
   const t = translations[language];
 
+  // State for form data and submission status
+  const [status, setStatus] = useState<FormStatus>("idle");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,11 +27,22 @@ export function ContactForm() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Mesajul a fost trimis! Vă mulțumim pentru feedback.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setStatus("loading");
+
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" }); // Clear form on success
+    } else {
+      setStatus("error");
+    }
   };
 
   const handleChange = (
@@ -101,10 +117,29 @@ export function ContactForm() {
           <Button
             type="submit"
             className="w-full bg-secondary hover:bg-secondary/90"
+            disabled={status === "loading"}
           >
-            <Send className="h-4 w-4 mr-2" />
+            {status === "loading" ? (
+              <Loader className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <Send className="h-4 w-4 mr-2" />
+            )}
             {t.formSubmit}
           </Button>
+
+          {/* User Feedback Messages */}
+          {status === "success" && (
+            <div className="text-green-600 flex items-center gap-2 p-2 bg-green-50 border border-green-200 rounded-md">
+              <CheckCircle className="h-4 w-4" />
+              <p>Message sent successfully!</p>
+            </div>
+          )}
+          {status === "error" && (
+            <div className="text-destructive flex items-center gap-2 p-2 bg-red-50 border border-red-200 rounded-md">
+              <AlertTriangle className="h-4 w-4" />
+              <p>Something went wrong. Please try again.</p>
+            </div>
+          )}
         </form>
       </CardContent>
     </Card>
