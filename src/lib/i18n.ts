@@ -3,6 +3,7 @@ import { Coffee, Snowflake, Droplets, Flame, Leaf, Beer } from "lucide-react";
 
 export const translations = {
   ro: {
+    today: "Azi",
     // Navigation
     navHome: "Acasă",
     navMenu: "Meniu",
@@ -153,6 +154,7 @@ export const translations = {
     },
   },
   en: {
+    today: "Today",
     // Navigation
     navHome: "Home",
     navMenu: "Menu",
@@ -300,6 +302,7 @@ export const translations = {
     },
   },
   ru: {
+    today: "Сегодня",
     // Navigation
     navHome: "Главная",
     navMenu: "Меню",
