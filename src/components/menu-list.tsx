@@ -44,7 +44,7 @@ export function MenuList({ menuSections }: MenuListProps) {
 
   const getTranslation = (item: MenuItem, field: "name" | "description") => {
     const key = `${field}_${language}` as keyof MenuItem;
-    return item[key] || item[`${field}_ro` as keyof MenuItem]; // Fallback to Romanian
+    return item[key] || item[`${field}_ro` as keyof MenuItem];
   };
 
   return (
