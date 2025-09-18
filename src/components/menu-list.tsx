@@ -30,13 +30,21 @@ interface MenuListProps {
   menuSections: MenuSectionProps[];
 }
 
+interface MenuItem {
+  name_ro: string;
+  name_en: string;
+  name_ru: string;
+  description_ro?: string;
+  description_en?: string;
+  description_ru?: string;
+  price: string;
+}
 export function MenuList({ menuSections }: MenuListProps) {
   const { language } = useContext(LanguageContext);
 
-  //@ts-ignore
-  const getTranslation = (item: any, field: "name" | "description") => {
-    const key = `${field}_${language}`;
-    return item[key] || item[`${field}_ro`]; // Fallback to Romanian
+  const getTranslation = (item: MenuItem, field: "name" | "description") => {
+    const key = `${field}_${language}` as keyof MenuItem;
+    return item[key] || item[`${field}_ro` as keyof MenuItem]; // Fallback to Romanian
   };
 
   return (
