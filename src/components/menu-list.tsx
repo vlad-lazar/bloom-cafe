@@ -33,6 +33,7 @@ interface MenuListProps {
 export function MenuList({ menuSections }: MenuListProps) {
   const { language } = useContext(LanguageContext);
 
+  //@ts-ignore
   const getTranslation = (item: any, field: "name" | "description") => {
     const key = `${field}_${language}`;
     return item[key] || item[`${field}_ro`]; // Fallback to Romanian

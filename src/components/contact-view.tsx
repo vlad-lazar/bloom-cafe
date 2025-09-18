@@ -4,16 +4,15 @@ import { useContext } from "react";
 import { LanguageContext } from "@/app/layout";
 import { translations } from "@/lib/i18n";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { WorkingHours, type HoursInfo } from "@/components/working-hours";
+import { MapPin } from "lucide-react";
+import { type HoursInfo } from "@/components/working-hours";
 import { ContactForm } from "@/components/contact-form";
 
 interface ContactViewProps {
   hoursData: HoursInfo[];
 }
 
-export function ContactView({ hoursData }: ContactViewProps) {
+export function ContactView({}: ContactViewProps) {
   const { language } = useContext(LanguageContext);
   const t = translations[language];
 
