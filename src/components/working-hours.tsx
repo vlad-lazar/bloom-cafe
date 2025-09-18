@@ -47,7 +47,7 @@ export function WorkingHours({
     const isClosed = displayDay.open_time.toUpperCase() === "CLOSED";
 
     return (
-      <div className="flex justify-between text-muted-foreground">
+      <div className="flex justify-center text-muted-foreground">
         {/* Use the new "Today" translation */}
         <span>{t.today}</span>
         <span>

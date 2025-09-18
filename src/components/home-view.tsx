@@ -1,4 +1,3 @@
-// src/components/home-view.tsx
 "use client";
 
 import { useContext } from "react";
@@ -12,11 +11,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Coffee, Clock, MapPin, Star } from "lucide-react";
 import { WorkingHours, type HoursInfo } from "@/components/working-hours";
 import { SpecialtiesSection, Specialty } from "./specialities-section";
-// Import the specialties component
 
 interface HomeViewProps {
   hoursData: HoursInfo[];
-  specialties: Specialty[]; // Add specialties to the props
+  specialties: Specialty[];
 }
 
 export function HomeView({ hoursData, specialties }: HomeViewProps) {
@@ -108,7 +106,7 @@ export function HomeView({ hoursData, specialties }: HomeViewProps) {
         </div>
       </section>
 
-      {/* Use the new dynamic specialties section */}
+      {/* Dynamic Specialties Section */}
       <SpecialtiesSection specialties={specialties} />
 
       {/* Location Section */}
@@ -132,11 +130,10 @@ export function HomeView({ hoursData, specialties }: HomeViewProps) {
       {/* Footer */}
       <footer className="bg-card py-12 px-4 border-t">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+          {/* --- CHANGE IS HERE --- */}
+          <div className="grid md:grid-cols-3 gap-8 text-center items-start">
             <div>
-              <h3 className="text-2xl font-bold text-primary mb-4">
-                Bloom Café
-              </h3>
+              <h4 className="font-semibold mb-4">Bloom Café</h4>
               <p className="text-muted-foreground">{t.footerSlogan}</p>
             </div>
             <div>

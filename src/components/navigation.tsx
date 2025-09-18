@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -19,7 +20,10 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-2xl font-bold text-primary">
-            Bloom Café
+            <div className="flex items-center space-x-2">
+              <Image src="/logo.png" alt="Bloom Café" width={50} height={50} />
+              Bloom Café
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
